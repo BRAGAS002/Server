@@ -61,7 +61,6 @@ app.get('/messages', (req, res) => {
     });
 });
 
-
 app.get('/messages', (req, res) => {
     const query = `SELECT * FROM messages ORDER BY timestamp DESC`;
     db.all(query, [], (err, rows) => {
