@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
 
 const app = express();
 const PORT = 3000;
@@ -43,21 +42,6 @@ app.post('/submit', (req, res) => {
             return res.status(500).send('<h1>There was an error saving your message. Please try again.</h1>');
         }
         res.send('<h1>Message received. Thank you for reaching out!</h1>');
-    });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
-
-app.get('/messages', (req, res) => {
-    const query = `SELECT * FROM messages ORDER BY timestamp DESC`;
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            console.error('Error fetching messages:', err.message);
-            return res.status(500).send('<h1>Error fetching messages.</h1>');
-        }
-        res.json(rows);
     });
 });
 
@@ -119,3 +103,8 @@ app.get('/messages', (req, res) => {
         res.send(htmlContent);
     });
 });
+
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
+});
+
